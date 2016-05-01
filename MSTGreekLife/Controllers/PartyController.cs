@@ -11,6 +11,7 @@ using MSTGreekLife.Models;
 
 namespace MSTGreekLife.Controllers
 {
+    [Authorize]
     public class PartyController : Controller
     {
         private GreekLifeContext db = new GreekLifeContext();

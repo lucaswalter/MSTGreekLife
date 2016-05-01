@@ -4,13 +4,13 @@
     ViewBag.Title = "Scheduled Greek Parties";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Schedule Party", "Create")
 </p>
-<table class="table">
-    <tr>
+<tr>
+    <table class="table">
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
@@ -24,7 +24,7 @@
             @Html.DisplayNameFor(model => model.Location)
         </th>
         <th></th>
-    </tr>
+</tr>
 
 @foreach (var item in Model) {
     <tr>
@@ -38,7 +38,10 @@
             @Html.DisplayFor(modelItem => item.Time)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Location)
+            @Html.DisplayFor(modelItem => item.Location.Street)
+            <div>
+                @Html.DisplayFor(modelItem => item.Location.City), @Html.DisplayFor(modelItem => item.Location.State), @Html.DisplayFor(modelItem => item.Location.ZIP)
+            </div>
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
