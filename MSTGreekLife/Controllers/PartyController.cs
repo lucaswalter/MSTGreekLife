@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using MSTGreekLife.DAL;
 using MSTGreekLife.Models;
 
@@ -20,6 +22,14 @@ namespace MSTGreekLife.Controllers
         // GET: Party
         public ActionResult Index()
         {
+            ApplicationUser user =
+                System.Web.HttpContext.Current.GetOwinContext()
+                    .GetUserManager<ApplicationUserManager>()
+                    .FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+
+            var school = db.Schools.FirstOrDefault(x => x.Id == user.SchoolId);
+            ViewBag.SchoolName = school.SchoolName;
+
             return View(db.Parties.ToList());
         }
 
