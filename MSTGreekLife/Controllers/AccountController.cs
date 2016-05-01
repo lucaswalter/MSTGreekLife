@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using MSTGreekLife.DAL;
 using MSTGreekLife.Models;
 
 namespace MSTGreekLife.Controllers
@@ -15,6 +16,7 @@ namespace MSTGreekLife.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        private GreekLifeContext db = new GreekLifeContext();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -151,7 +153,7 @@ namespace MSTGreekLife.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, SchoolId = model.SchoolID };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

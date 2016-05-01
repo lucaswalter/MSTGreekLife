@@ -65,6 +65,10 @@ namespace MSTGreekLife.Models
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "School ID")]
+        public int SchoolID { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
