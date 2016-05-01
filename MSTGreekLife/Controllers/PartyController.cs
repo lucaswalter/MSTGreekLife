@@ -16,25 +16,11 @@ namespace MSTGreekLife.Controllers
     {
         private GreekLifeContext db = new GreekLifeContext();
 
+        // TODO: Add GroupBy Aggregation
         // GET: Party
         public ActionResult Index()
         {
             return View(db.Parties.ToList());
-        }
-
-        // GET: Party/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            PartyModel partyModel = db.Parties.Find(id);
-            if (partyModel == null)
-            {
-                return HttpNotFound();
-            }
-            return View(partyModel);
         }
 
         // GET: Party/Create

@@ -339,7 +339,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
@@ -365,7 +364,6 @@
     <Content Include="Service References\Application Insights\ConnectedService.json" />
     <Content Include="Views\Party\Create.cshtml" />
     <Content Include="Views\Party\Delete.cshtml" />
-    <Content Include="Views\Party\Details.cshtml" />
     <Content Include="Views\Party\Edit.cshtml" />
     <Content Include="Views\Party\Index.cshtml" />
   </ItemGroup>

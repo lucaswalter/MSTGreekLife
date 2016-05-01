@@ -34,7 +34,6 @@
             </div>
         </div>
 
-
         <div class="form-group">
             @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -56,14 +55,15 @@
 </div>
 
 @section scripts {
-<script type="text/javascript">
-  $(function () {
-    $('#Time').datetimepicker({
-      format: 'T',
-      showClose: true,
-      showClear: true,
-      toolbarPlacement: 'top'
-    });
-  });
-</script>
+    <script type="text/javascript">
+        $(function() {
+            $('#Time')
+                .datetimepicker({
+                    format: 'L',
+                    showClose: true,
+                    showClear: true,
+                    toolbarPlacement: 'top'
+                });
+        });
+    </script>
 }

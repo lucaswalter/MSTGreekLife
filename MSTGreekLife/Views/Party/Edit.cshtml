@@ -1,17 +1,12 @@
 ﻿@model MSTGreekLife.Models.PartyModel
 
-@{
-    ViewBag.Title = "Edit";
-}
-
-<h2>Edit</h2>
+<h2>Edit Party Details</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>PartyModel</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
@@ -59,3 +54,17 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+@section scripts {
+    <script type="text/javascript">
+        $(function() {
+            $('#Time')
+                .datetimepicker({
+                    format: 'L',
+                    showClose: true,
+                    showClear: true,
+                    toolbarPlacement: 'top'
+                });
+        });
+    </script>
+}
