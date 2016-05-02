@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using MSTGreekLife.DAL;
@@ -28,56 +29,56 @@ namespace MSTGreekLife.Controllers
             var school = db.Schools.FirstOrDefault(x => x.Id == user.SchoolId);
             ViewBag.SchoolName = school.SchoolName;
 
+            // Order Parties By Date Time
+            /*var orderedParties =
+                db.Parties.OrderByDescending(x => x.Time).ThenByDescending(x => x.Time.TimeOfDay).ToList();*/
+
             return View(db.Parties.ToList());
         }
 
+        [HttpGet]
+        public PartialViewResult ListAttendees(int id)
+        {
+            var party = db.Parties.Find(id);
+            return PartialView(party);
+        }
+
+        [HttpGet]
         public ActionResult SignIn(int id)
         {
             var party = db.Parties.Find(id);
-            return View(party);
-        }
+            var vm = new SignInViewModel {Party = party, PartyID = id};
+            ViewBag.PartyID = id;
 
-        public ActionResult CheckStudentID()
-        {
-            return View();
+            return View(vm);
         }
 
         [HttpPost]
-        public ActionResult CheckStudentID(int studentID)
+        public ActionResult SignIn(SignInViewModel model)
         {
-            var student = db.Students.FirstOrDefault(x => x.StudentID == studentID);
+            var student = db.Students.FirstOrDefault(s => s.StudentID == model.StudentId);
 
-
+            // TODO: Check If Student Is Blacklisted
             if (student != null)
             {
-                // Add Student To Party Attendees List
-                //var party = db.Parties.Find(partyID);
-                //party.Students.Add(student);
+                var party = db.Parties.Find(1);
+                party.Students.Add(student);
                 db.SaveChanges();
-                return RedirectToAction("SignIn", "Party");
             }
-            else
-            {
-                return RedirectToAction("SignIn", "Party");
-            }
+
+            return RedirectToAction("SignIn");
         }
 
-       /* [HttpPost]
-        public ActionResult SignIn(StudentSignIn studentSignIn)
+        public ActionResult DeleteStudent(int id, int partyId)
         {
-            var student = db.Students.FirstOrDefault(s => s.StudentID == studentSignIn.StudentID);
+            var student = db.Students.Find(id);
+            var party = db.Parties.Find(partyId);
 
-            if (student != null)
-            {
-                // Success, Add to List
-            }
-            else
-            {
-                // Failure
-            }
+            party.Students.Remove(student);
+            db.SaveChanges();
 
-            return View();
-        }*/
+            return RedirectToAction("SignIn", "Party", new { id = partyId });
+        }
 
         // GET: Party/Create
         public ActionResult Create()

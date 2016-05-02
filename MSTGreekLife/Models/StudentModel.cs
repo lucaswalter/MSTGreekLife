@@ -15,8 +15,6 @@ namespace MSTGreekLife.Models
         // House The Student Is Affiliated With 
         public virtual GreekHouseModel GreekHouse { get; set; }
 
-        public virtual ICollection<PartyModel> PartiesAttended { get; set; }
-
         // Collection Of The Two Guests A Student May Bring
         public virtual ICollection<GuestModel> Guests { get; set; }
     }

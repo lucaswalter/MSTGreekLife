@@ -16,6 +16,7 @@ namespace MSTGreekLife.DAL
         public DbSet<StudentModel> Students { get; set; }
         public DbSet<GuestModel> Guests { get; set; }
         public DbSet<PartyModel> Parties { get; set; }
+        public DbSet<BlacklistModel> Blacklistings { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
