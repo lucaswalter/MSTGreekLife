@@ -13,6 +13,9 @@ namespace MSTGreekLife.Models
         public string HouseLetters { get; set; }
         public Address HouseAddress { get; set; }
 
+        // School That A House Belongs Too
+        // public virtual SchoolModel School { get; set; }
+
         // Parties That A Greek House Schedules & Holds
         public virtual ICollection<PartyModel> Parties { get; set; }
     }

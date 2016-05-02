@@ -1,0 +1,58 @@
+﻿@model MSTGreekLife.Models.PartyModel
+
+@{
+    ViewBag.Title = "SignIn";
+}
+
+<h2>Party Sign In / Manage Attendees</h2>
+
+
+
+<div>
+    @Html.Partial("~/Views/Party/CheckStudentID.cshtml");
+</div>
+
+<tr>
+    <table class="table">
+        <th>
+            First Name
+        </th>
+        <th>
+            Last Name
+        </th>
+        <th>
+            Greek House
+        </th>
+        <th>
+            Student ID
+        </th>
+        <th>
+            Actions
+        </th>
+</tr>
+
+<h3>Current Attendees</h3>
+@foreach (var item in Model.Students)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GreekHouse.HouseName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StudentID)
+        </td>
+        <td>
+            @Html.ActionLink("Blacktist From Location", "Blacklist", new { id = item.StudentID })
+        </td>
+    </tr>
+}
+
+<h3>Blacklisted Students</h3>
+
+</table>

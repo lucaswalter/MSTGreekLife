@@ -1,4 +1,4 @@
-﻿@model MSTGreekLife.Models.PartyModel
+﻿@model MSTGreekLife.Models.CreatePartyViewModel
 
 
 <h2>Schedule Party</h2>
@@ -10,6 +10,13 @@
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.Label("Hosting House", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.SelectedHouseId, Model.ListOfGreekHouses, "Choose Hosting House")
+            </div>
+        </div>
+
         <div class="form-group">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">

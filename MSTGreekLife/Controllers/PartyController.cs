@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -33,10 +31,62 @@ namespace MSTGreekLife.Controllers
             return View(db.Parties.ToList());
         }
 
+        public ActionResult SignIn(int id)
+        {
+            var party = db.Parties.Find(id);
+            return View(party);
+        }
+
+        public ActionResult CheckStudentID()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CheckStudentID(int studentID)
+        {
+            var student = db.Students.FirstOrDefault(x => x.StudentID == studentID);
+
+
+            if (student != null)
+            {
+                // Add Student To Party Attendees List
+                //var party = db.Parties.Find(partyID);
+                //party.Students.Add(student);
+                db.SaveChanges();
+                return RedirectToAction("SignIn", "Party");
+            }
+            else
+            {
+                return RedirectToAction("SignIn", "Party");
+            }
+        }
+
+       /* [HttpPost]
+        public ActionResult SignIn(StudentSignIn studentSignIn)
+        {
+            var student = db.Students.FirstOrDefault(s => s.StudentID == studentSignIn.StudentID);
+
+            if (student != null)
+            {
+                // Success, Add to List
+            }
+            else
+            {
+                // Failure
+            }
+
+            return View();
+        }*/
+
         // GET: Party/Create
         public ActionResult Create()
         {
-            return View();
+            var greekHouses = db.GreekHouses.ToList();
+            var selectionList = new SelectList(greekHouses, "Id", "HouseName");
+            var vm = new CreatePartyViewModel { ListOfGreekHouses = selectionList };
+
+            return View(vm);
         }
 
         // POST: Party/Create
@@ -44,8 +94,17 @@ namespace MSTGreekLife.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Theme,Time,Location")] PartyModel partyModel)
+        public ActionResult Create(CreatePartyViewModel model)
         {
+            var partyModel = new PartyModel
+            {
+                HostingHouse = db.GreekHouses.Find(model.SelectedHouseId),
+                Name = model.Name,
+                Theme = model.Theme,
+                Time = model.Time,
+                Location = model.Location
+            };
+
             if (ModelState.IsValid)
             {
                 db.Parties.Add(partyModel);

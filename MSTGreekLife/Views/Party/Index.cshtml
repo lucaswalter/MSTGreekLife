@@ -30,7 +30,7 @@
 {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
+            @Html.ActionLink(item.Name, "SignIn", new { id = item.Id })
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Theme)
