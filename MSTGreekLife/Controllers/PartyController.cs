@@ -112,7 +112,7 @@ namespace MSTGreekLife.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(partyModel);
+            return View(model);
         }
 
         // GET: Party/Edit/5
