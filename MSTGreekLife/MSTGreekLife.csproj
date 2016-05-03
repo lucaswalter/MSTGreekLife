@@ -370,7 +370,6 @@
     <Content Include="Views\Party\Edit.cshtml" />
     <Content Include="Views\Party\Index.cshtml" />
     <Content Include="Views\Party\SignIn.cshtml" />
-    <Content Include="Views\Shared\_CheckStudentID.cshtml" />
     <Content Include="Views\Party\ListAttendees.cshtml" />
   </ItemGroup>
   <ItemGroup>
