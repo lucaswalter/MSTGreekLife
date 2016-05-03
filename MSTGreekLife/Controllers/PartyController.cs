@@ -16,7 +16,6 @@ namespace MSTGreekLife.Controllers
     {
         private GreekLifeContext db = new GreekLifeContext();
 
-        // TODO: Add GroupBy Aggregation
         // GET: Party
         public ActionResult Index()
         {
