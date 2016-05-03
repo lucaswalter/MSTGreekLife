@@ -57,6 +57,9 @@ namespace MSTGreekLife.Controllers
         public ActionResult SignIn(SignInViewModel model)
         {
             var student = db.Students.FirstOrDefault(s => s.StudentID == model.StudentId);
+            var routeValues = Url.RequestContext.RouteData.Values;
+            var routeIdValue = routeValues["id"].ToString();
+            var partyId = Int32.Parse(routeIdValue);
 
             if (student != null)
             {
@@ -72,7 +75,7 @@ namespace MSTGreekLife.Controllers
                 // Student May Attend Party
                 if (blacklistings.Count == 0)
                 {
-                    var party = db.Parties.Find(1);
+                    var party = db.Parties.Find(partyId);
                     party.Students.Add(student);
                     db.SaveChanges();
                 }
