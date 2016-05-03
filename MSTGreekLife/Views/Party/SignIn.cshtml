@@ -9,3 +9,15 @@
 }
 
 @Html.Partial("~/Views/Party/ListAttendees.cshtml", @Model.Party)
+
+@if (ViewBag.Blacklisted != null)
+{
+    <script>
+
+    $(document).ready(function(){
+        alert('This Student Is Blacklisted & May Not Attend This Party!');
+    });
+
+    </script>
+
+}

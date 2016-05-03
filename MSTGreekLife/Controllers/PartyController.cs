@@ -60,12 +60,28 @@ namespace MSTGreekLife.Controllers
         {
             var student = db.Students.FirstOrDefault(s => s.StudentID == model.StudentId);
 
-            // TODO: Check If Student Is Blacklisted
             if (student != null)
             {
-                var party = db.Parties.Find(1);
-                party.Students.Add(student);
-                db.SaveChanges();
+
+                // Queries Blacklisting Table To Determine If Student Signing In Is Blacklisted
+                var blacklistings =
+                    db.Blacklistings.Where(
+                        x => x.Student.StudentID == student.StudentID).ToList();
+
+                // Check If Blacklisting Matches Hosting Houses ID
+                //var blacklisting = blacklistings.FirstOrDefault(x => x.GreekHouse.Id == model.Party.HostingHouse.Id);
+
+                // Student May Attend Party
+                if (blacklistings.Count == 0)
+                {
+                    var party = db.Parties.Find(1);
+                    party.Students.Add(student);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    ViewBag.Blacklisted = true;
+                }                
             }
 
             return RedirectToAction("SignIn");
@@ -74,6 +90,7 @@ namespace MSTGreekLife.Controllers
         public ActionResult BlackListStudent(int id, int partyId)
         {
             var student = db.Students.Find(id);
+            var party = db.Parties.Find(partyId);
 
             var blacklisting = new BlacklistModel
             {
@@ -82,6 +99,7 @@ namespace MSTGreekLife.Controllers
                 Reason = null
             };
 
+            party.Students.Remove(student);
             db.Blacklistings.Add(blacklisting);
             db.SaveChanges();
 
