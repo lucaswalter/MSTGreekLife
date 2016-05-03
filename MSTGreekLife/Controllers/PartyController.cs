@@ -40,6 +40,8 @@ namespace MSTGreekLife.Controllers
         public PartialViewResult ListAttendees(int id)
         {
             var party = db.Parties.Find(id);
+            // EF Query To Count Current Number Of Party Attendees
+            ViewBag.NumberOfPeople = party.Students.Count;
             return PartialView(party);
         }
 
