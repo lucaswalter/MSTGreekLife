@@ -9,6 +9,9 @@
             Last Name
         </th>
         <th>
+            Age
+        </th>
+        <th>
             Greek House
         </th>
         <th>
@@ -30,17 +33,18 @@
             @Html.DisplayFor(modelItem => item.Name.LastName)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.Age)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.GreekHouse.HouseName)
         <td>
             @Html.DisplayFor(modelItem => item.StudentID)
         </td>
         <td>
-            @Html.ActionLink("Blacktist From Location", "Blacklist", new { id = item.StudentID }) |
+            @Html.ActionLink("Blacktist From Location", "BlackListStudent", new { id = item.StudentID, partyId = Model.Id }) |
             @Html.ActionLink("Delete", "DeleteStudent", routeValues: new { id = item.StudentID, partyId = Model.Id })
         </td>
     </tr>
 }
 
 </table>
-
-<h3>Blacklisted Students</h3>

@@ -372,6 +372,9 @@
     <Content Include="Views\Party\SignIn.cshtml" />
     <Content Include="Views\Party\ListAttendees.cshtml" />
     <Content Include="Views\Home\Students.cshtml" />
+    <Content Include="Views\Home\Blacklist.cshtml" />
+    <Content Include="Views\Home\BlacklistReason.cshtml" />
+    <Content Include="Views\Home\Unblacklist.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

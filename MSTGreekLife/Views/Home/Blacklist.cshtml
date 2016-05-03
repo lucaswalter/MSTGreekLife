@@ -1,0 +1,46 @@
+﻿@model IEnumerable<MSTGreekLife.Models.BlacklistModel>
+
+<h2>Blacklist</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Student Name
+        </th>
+        <th>
+            Student ID
+        </th>
+        <th>
+            House Blacklisted From
+        </th>
+        <th>
+            Reason
+        </th>
+        <th>
+            Actions
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.Student.Name.FirstName @item.Student.Name.LastName
+        </td>
+        <td>
+            @item.Student.StudentID
+        </td>
+        <td>
+            @item.GreekHouse.HouseName
+        </td>
+        <td>
+            @item.Reason
+        </td>
+        <td>
+            @Html.ActionLink("Edit Reason", "BlacklistReason", new { id=item.Id }) |
+            @Html.ActionLink("Unblacklist", "Unblacklist", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

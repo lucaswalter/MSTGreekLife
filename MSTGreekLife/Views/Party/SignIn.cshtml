@@ -5,7 +5,7 @@
 @using (Html.BeginForm("SignIn", "Party", FormMethod.Post))
 {
     @Html.TextBoxFor(m => m.StudentId)   
-    <input type="submit" value="SignIn" />
+    <input type="submit" value="Sign In" />
 }
 
 @Html.Partial("~/Views/Party/ListAttendees.cshtml", @Model.Party)

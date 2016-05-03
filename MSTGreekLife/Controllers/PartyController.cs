@@ -71,6 +71,23 @@ namespace MSTGreekLife.Controllers
             return RedirectToAction("SignIn");
         }
 
+        public ActionResult BlackListStudent(int id, int partyId)
+        {
+            var student = db.Students.Find(id);
+
+            var blacklisting = new BlacklistModel
+            {
+                GreekHouse = student.GreekHouse,
+                Student = student,
+                Reason = null
+            };
+
+            db.Blacklistings.Add(blacklisting);
+            db.SaveChanges();
+
+            return RedirectToAction("SignIn", "Party", new { id = partyId });
+        }
+
         public ActionResult DeleteStudent(int id, int partyId)
         {
             var student = db.Students.Find(id);
